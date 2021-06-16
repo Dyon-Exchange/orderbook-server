@@ -128,7 +128,7 @@ func TestCalculateMarketPriceHandlerEmptyBody(t *testing.T) {
 func TestCalculateMarketPriceHandlerNoAsset(t *testing.T) {
 	body := CancelOrderRequest{
 		Asset:   "string43211",
-		OrderId: "1",
+		OrderID: "1",
 	}
 	payload := new(bytes.Buffer)
 	json.NewEncoder(payload).Encode(body)

@@ -5,10 +5,12 @@ import (
 	"net/http"
 )
 
+// AddAssetRequest represents the body expected by the handler
 type AddAssetRequest struct {
 	Asset string
 }
 
+// AddAssetHandler handles a request to create a new orderbook for the supplied asset
 func AddAssetHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed.", http.StatusMethodNotAllowed)

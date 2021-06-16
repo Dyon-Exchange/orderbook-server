@@ -14,9 +14,8 @@ func TestAddMarketOrder(t *testing.T) {
 	body := AddMarketOrderRequest{
 		Asset:    "asset21",
 		Side:     "ASK",
-		OrderId:  "orderid123",
+		OrderID:  "orderid123",
 		Quantity: decimal.New(2, 0),
-		Price:    decimal.New(10, 0),
 	}
 	payload := new(bytes.Buffer)
 	json.NewEncoder(payload).Encode(body)
@@ -37,9 +36,8 @@ func TestAddMarketOrder(t *testing.T) {
 	body = AddMarketOrderRequest{
 		Asset:    "asset123",
 		Side:     "BID",
-		OrderId:  "orderid8",
+		OrderID:  "orderid8",
 		Quantity: decimal.New(2, 0),
-		Price:    decimal.New(10, 0),
 	}
 	payload = new(bytes.Buffer)
 	json.NewEncoder(payload).Encode(body)
@@ -116,9 +114,8 @@ func TestAddMarketOrderInvalidOrderSide(t *testing.T) {
 	body := AddMarketOrderRequest{
 		Asset:    "asset123",
 		Side:     "INVALID",
-		OrderId:  "order123",
+		OrderID:  "order123",
 		Quantity: decimal.New(2, 0),
-		Price:    decimal.New(10, 0),
 	}
 
 	payload := new(bytes.Buffer)
@@ -146,9 +143,8 @@ func TestAddMarketOrderNoQuantity(t *testing.T) {
 	body := AddMarketOrderRequest{
 		Asset:    "asset90",
 		Side:     "ASK",
-		OrderId:  "orderid90",
+		OrderID:  "orderid90",
 		Quantity: decimal.New(0, 0),
-		Price:    decimal.New(10, 0),
 	}
 	payload := new(bytes.Buffer)
 	json.NewEncoder(payload).Encode(body)

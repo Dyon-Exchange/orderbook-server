@@ -17,7 +17,7 @@ func TestCancelOrderHandler(t *testing.T) {
 
 	body := CancelOrderRequest{
 		Asset:   "string123",
-		OrderId: "1",
+		OrderID: "1",
 	}
 	payload := new(bytes.Buffer)
 	json.NewEncoder(payload).Encode(body)
@@ -71,7 +71,7 @@ func TestCancelOrderHandlerEmptyBody(t *testing.T) {
 func TestCancelOrderHandlerNoAsset(t *testing.T) {
 	body := CancelOrderRequest{
 		Asset:   "string4321",
-		OrderId: "1",
+		OrderID: "1",
 	}
 	payload := new(bytes.Buffer)
 	json.NewEncoder(payload).Encode(body)

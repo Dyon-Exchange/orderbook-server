@@ -73,7 +73,7 @@ func (ob *OrderBook) ProcessLimitOrder(side Side, orderID string, quantity, pric
 
 For example:
 ```
-ProcessLimitOrder(ob.Sell, "uinqueID", decimal.New(55, 0), decimal.New(100, 0))
+ProcessLimitOrder(ob.Sell, "uniqueID", decimal.New(55, 0), decimal.New(100, 0))
 
 asks: 110 -> 5      110 -> 5
       100 -> 1      100 -> 56
@@ -87,7 +87,7 @@ partial - nil
 ```
 
 ```
-ProcessLimitOrder(ob.Buy, "uinqueID", decimal.New(7, 0), decimal.New(120, 0))
+ProcessLimitOrder(ob.Buy, "uniqueID", decimal.New(7, 0), decimal.New(120, 0))
 
 asks: 110 -> 5
       100 -> 1
@@ -97,12 +97,12 @@ bids: 90  -> 5      120 -> 1
                     80  -> 1
 
 done    - 2 (or more orders)
-partial - uinqueID order
+partial - un order
 
 ```
 
 ```
-ProcessLimitOrder(ob.Buy, "uinqueID", decimal.New(3, 0), decimal.New(120, 0))
+ProcessLimitOrder(ob.Buy, "uniqueID", decimal.New(3, 0), decimal.New(120, 0))
 
 asks: 110 -> 5
       100 -> 1      110 -> 3
@@ -110,7 +110,7 @@ asks: 110 -> 5
 bids: 90  -> 5      90  -> 5
       80  -> 1      90  -> 5
 
-done    - 1 order with 100 price, (may be also few orders with 110 price) + uinqueID order
+done    - 1 order with 100 price, (may be also few orders with 110 price) + uniqueID order
 partial - 1 order with price 110
 
 ```

@@ -14,7 +14,7 @@ func TestAddLimitOrder(t *testing.T) {
 	body := AddLimitOrderRequest{
 		Asset:    "asset123",
 		Side:     "ASK",
-		OrderId:  "orderid123",
+		OrderID:  "orderid123",
 		Quantity: decimal.New(2, 0),
 		Price:    decimal.New(10, 0),
 	}
@@ -37,7 +37,7 @@ func TestAddLimitOrder(t *testing.T) {
 	body = AddLimitOrderRequest{
 		Asset:    "asset123",
 		Side:     "BID",
-		OrderId:  "orderid8",
+		OrderID:  "orderid8",
 		Quantity: decimal.New(2, 0),
 		Price:    decimal.New(10, 0),
 	}
@@ -62,7 +62,7 @@ func TestAddLimitOrderNoQuantity(t *testing.T) {
 	body := AddLimitOrderRequest{
 		Asset:    "asset321",
 		Side:     "ASK",
-		OrderId:  "orderid123",
+		OrderID:  "orderid123",
 		Quantity: decimal.New(0, 0),
 		Price:    decimal.New(10, 0),
 	}
@@ -90,7 +90,7 @@ func TestAddLimitOrderInvalidOrderSide(t *testing.T) {
 	body := AddLimitOrderRequest{
 		Asset:    "asset123",
 		Side:     "INVALID",
-		OrderId:  "order123",
+		OrderID:  "order123",
 		Quantity: decimal.New(2, 0),
 		Price:    decimal.New(10, 0),
 	}

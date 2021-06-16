@@ -8,6 +8,7 @@ import (
 	"github.com/conorbros/orderbook-server/handlers"
 )
 
+// HealthCheckHandler allows other services to check that the orderbook server is alive
 func HealthCheckHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
@@ -27,5 +28,11 @@ func main() {
 
 	http.HandleFunc("/healthCheck", HealthCheckHandler)
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	http.HandleFunc("/getOrders", handlers.GetOrdersHandler)
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNotFound)
+	})
+
+	log.Fatal(http.ListenAndServe(":5341", nil))
 }
