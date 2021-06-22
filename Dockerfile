@@ -19,6 +19,6 @@ RUN apk add ca-certificates
 # copy binary from build image
 COPY --from=build_base /tmp/orderbook-server/out/orderbook-server /app/orderbook-server
 
-EXPOSE 8080
+EXPOSE 5341
 
 CMD ["/app/orderbook-server"]
