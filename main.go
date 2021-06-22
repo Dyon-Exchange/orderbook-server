@@ -30,6 +30,8 @@ func main() {
 
 	http.HandleFunc("/getOrders", handlers.GetOrdersHandler)
 
+	http.HandleFunc("/reset", handlers.ResetHandler)
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 	})

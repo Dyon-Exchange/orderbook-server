@@ -42,3 +42,7 @@ func AddAsset(asset string) {
 func init() {
 	Assets = make(map[string]*orderbook.OrderBook)
 }
+
+func Reset() {
+	Assets = make(map[string]*orderbook.OrderBook)
+}
