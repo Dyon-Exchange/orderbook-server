@@ -1,8 +1,28 @@
 # orderbook-server
 
-This repo is a HTTP wrapper around an open source orderbook engine from Github with some modifications to allow creating new order books for different assets. 
+This repo is a HTTP wrapper around an open source orderbook engine with some modifications to allow creating new order books for different assets. 
+
+## Usage
+
+Can be run locally with `go run main.go`. Connect to `http://localhost:5341`.
+
+With docker: 
+
+`docker run -p 80:5341 orderbook-server`
 
 ## API
+
+Orders are represented in the orderbook with the following JSON schema. Any endpoints returning order details will be in the following format. 
+
+``` JSON
+{
+    side: "ASK" | "BID",
+    id: string,
+    timestamp: Date,
+    quantity: decimal,
+    price: decimal
+}
+```
 
 ### Add Asset
 
@@ -18,24 +38,60 @@ Request:
 
 Response: `200` if success.
 
-### Add Order
+### Add Limit Order
 
-`/addOrder` adds a new order to the book
+`/addLimitOrder` adds a new limit order to the book
 
 Request:
 
 ```JSON
 {
-    "Type": "LIMIT" | "MARKET",
     Asset: string,
     Side: "ASK" | "BID",
-    OrderId: string, // unique id that identifies order in exchange database
+    OrderId: string, // unique id that identifies order in exchange database. Use whatever you want for this as long as its unique for each order. UUID is fine.
     Quantity: decimal,
     Price:  decimal
 }
 ```
 
-### Cancel OrderA
+Response:
+
+```JSON 
+{
+     Done: []Order, // any orders that were filled. This will include your order if it was filled.
+     Partial: Order, // any order that was partially filled. This will be your order if it was partially filled,
+     PartialQuantityProcessed: decimal // the amount in the partial order that was filled
+}
+```
+
+### Add Market Order
+
+`/addMarketOrder`adds a new market order to the orderbook
+
+Request:
+
+```JSON
+{
+    Asset: string,
+    Side: "ASK"|"BID",
+    OrderId: string,
+    Quantity: decimal,
+    Price: decimal
+}
+```
+
+Response:
+
+``` JSON
+{
+    Done: []Order,
+    Partial: Order,
+    PartialQuantityProcessed: decimal,
+    QuantityLeft: decimal // the the remainder from your market order that wasn't filled 
+}
+```
+
+### Cancel Order
 
 `/cancelOrder` removes an order from the orderbook.
 
@@ -45,6 +101,14 @@ Request:
 {
     "OrderId": string,
     "Asset": string
+}
+```
+
+Response:
+
+``` JSON
+{
+    Order: Order // order that was canceled 
 }
 ```
 
@@ -62,14 +126,32 @@ Request:
 }
 ```
 
+Response:
+
+``` JSON
+{
+    Price: decimal
+}
+```
+
 ### Health Check
 
-`/healthCheck` confirms the service is alive. In future this should ping the external datastore of the orderbook.
+`/healthCheck` confirms the service is alive. In future this should ping the external datastore of the orderbook. 
 
-Response
+Response:
 
 ```JSON
 {
     "alive": true
 }
 ```
+
+
+### Get orders
+
+`/getOrders`returns all the orderbooks on the server. Will just dump out the entire state of the orderbook so it will be complicated to make sense of it. Useful for debugging with a CTRL-F of a particular orderId.
+
+### Reset
+
+`/reset`resets the orderbook and deletes all orders. Useful for development and testing.
+
