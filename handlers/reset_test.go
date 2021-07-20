@@ -7,7 +7,7 @@ import (
 )
 
 func TestResetHandler(t *testing.T) {
-	req, err := http.NewRequest("DELETE", "/reset", nil)
+	req, err := http.NewRequest("GET", "/reset", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
