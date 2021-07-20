@@ -2,6 +2,7 @@
 
 This repo is a HTTP wrapper around an open source orderbook engine with some modifications to allow creating new order books for different assets. 
 
+
 ## Usage
 
 Can be run locally with `go run main.go`. Connect to `http://localhost:5341`.
@@ -9,6 +10,8 @@ Can be run locally with `go run main.go`. Connect to `http://localhost:5341`.
 With docker: 
 
 `docker run -p 80:5341 orderbook-server`
+
+There is a docker compose file included also. This allows you to have two containers running orderbooks so you can have separate ones for different environments, running on port `80` and `8080`. The Dockerfile is stored on my private registry but it should be moved to a Dyon owned one moving forward.
 
 ## API
 
