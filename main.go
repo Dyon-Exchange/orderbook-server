@@ -4,7 +4,7 @@ import (
 	"io"
 	"log"
 	"net/http"
-
+	"fmt"
 	"github.com/conorbros/orderbook-server/handlers"
 )
 
@@ -35,6 +35,8 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 	})
+
+	fmt.Printf("Orderbook server is listening on port 5341\n")
 
 	log.Fatal(http.ListenAndServe(":5341", nil))
 }
