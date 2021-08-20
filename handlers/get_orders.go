@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"net/http"
 
@@ -15,12 +14,12 @@ type GetOrdersResponse struct {
 }
 
 // GetOrdersHandler handles a request to retreive all the orders in the book
-// When there is a fully fledged  storage solution
+// When there is a fully fledged storage solution
 func GetOrdersHandler(w http.ResponseWriter, r *http.Request) {
 	// extract the productIdentifier from url query
 	keys, ok := r.URL.Query()["prodId"]
 	if !ok || len(keys[0]) < 1 {
-		fmt.Println("Url Param 'prodId' is missing")
+		http.Error(w, "Url Param 'prodId' is missing.", http.StatusBadRequest)
 		return
 	}
 	key := string(keys[0])
